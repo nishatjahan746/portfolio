@@ -138,15 +138,15 @@ const SkillsSection = () => {
                   </h3>
 
                   <div className="flex flex-wrap justify-center gap-4 mt-8">
-                    {skills.map((skill) => (
+                    {skills.map((skill, index) => (
                       <motion.div
                         key={`viz-${skill.name}`}
                         className="flex flex-col items-center"
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.05, y: -5 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
                         <motion.div
-                          className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center ${skill.color} text-white`}
+                          className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center ${skill.color} text-white relative overflow-hidden group`}
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           viewport={{ once: true }}
@@ -154,16 +154,73 @@ const SkillsSection = () => {
                             type: "spring",
                             stiffness: 260,
                             damping: 20,
-                            delay: 0.1,
+                            delay: index * 0.1,
                           }}
                         >
-                          <div className="text-2xl">{skill.icon}</div>
+                          <motion.div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-black bg-opacity-20"
+                            initial={{ opacity: 0 }}
+                            whileHover={{ opacity: 1 }}
+                          />
+                          <motion.div
+                            className="text-2xl relative z-10"
+                            whileHover={{ rotate: 360 }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            {skill.icon}
+                          </motion.div>
+                          <motion.div className="absolute -bottom-10 left-0 right-0 text-center text-xs font-bold bg-black bg-opacity-50 text-white py-1 group-hover:bottom-0 transition-all duration-300">
+                            {skill.level}%
+                          </motion.div>
                         </motion.div>
                         <p className="mt-2 text-sm font-medium text-slate-700 dark:text-slate-200">
                           {skill.name}
                         </p>
                       </motion.div>
                     ))}
+                  </div>
+
+                  <div className="mt-8">
+                    <h4 className="text-lg font-semibold mb-4 text-center">
+                      Data Science Workflow
+                    </h4>
+                    <div className="relative h-20">
+                      {[
+                        "Data Collection",
+                        "Data Cleaning",
+                        "Exploratory Analysis",
+                        "Feature Engineering",
+                        "Model Training",
+                        "Evaluation",
+                        "Deployment",
+                      ].map((step, i, arr) => {
+                        const position = (i / (arr.length - 1)) * 100;
+                        return (
+                          <motion.div
+                            key={step}
+                            className="absolute top-0 transform -translate-x-1/2"
+                            style={{ left: `${position}%` }}
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 + 0.5 }}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-primary mx-auto" />
+                            <p className="text-xs mt-2 w-20 text-center">
+                              {step}
+                            </p>
+                          </motion.div>
+                        );
+                      })}
+                      <motion.div
+                        className="absolute top-1.5 h-0.5 bg-primary"
+                        style={{ left: 0 }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5, duration: 1.5 }}
+                      />
+                    </div>
                   </div>
 
                   <Separator className="my-6" />

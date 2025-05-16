@@ -83,7 +83,55 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.8 }}
           >
-            Aspiring Data Scientist | Curious Mind | Life-Long Learner
+            <span className="relative inline-block">
+              <span className="absolute inset-0 flex items-center overflow-hidden whitespace-nowrap">
+                <motion.span
+                  animate={{
+                    opacity: [0, 1, 1, 0],
+                    x: [-20, 0, 0, 20],
+                    transition: {
+                      times: [0, 0.1, 0.9, 1],
+                      duration: 5,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    },
+                  }}
+                >
+                  Data Scientist
+                </motion.span>
+                <motion.span
+                  animate={{
+                    opacity: [0, 1, 1, 0],
+                    x: [-20, 0, 0, 20],
+                    transition: {
+                      times: [0, 0.1, 0.9, 1],
+                      duration: 5,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                      delay: 6,
+                    },
+                  }}
+                >
+                  ML Engineer
+                </motion.span>
+                <motion.span
+                  animate={{
+                    opacity: [0, 1, 1, 0],
+                    x: [-20, 0, 0, 20],
+                    transition: {
+                      times: [0, 0.1, 0.9, 1],
+                      duration: 5,
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                      delay: 12,
+                    },
+                  }}
+                >
+                  Data Analyst
+                </motion.span>
+              </span>
+            </span>
+            <span className="ml-2">| Curious Mind | Life-Long Learner</span>
           </motion.h2>
 
           <motion.p

@@ -243,7 +243,17 @@ const QuizSection = ({
                   </motion.div>
                 )}
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex flex-col gap-4">
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                  <motion.div
+                    className="bg-indigo-600 h-2.5 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{
+                      width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+                    }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
                 <Button
                   onClick={handleNextQuestion}
                   disabled={selectedOption === null || showFeedback}
