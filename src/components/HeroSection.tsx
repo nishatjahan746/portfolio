@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Copy, Github, Linkedin, Mail, Twitter, Download } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Tooltip,
@@ -8,6 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface SocialLink {
   icon: React.ReactNode;
@@ -16,7 +17,23 @@ interface SocialLink {
   action?: () => void;
 }
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  name?: string;
+  title?: string;
+  description?: string;
+  profileImage?: string;
+  darkMode?: boolean;
+  funMode?: boolean;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({
+  name = "Nishat Jahan",
+  title = "Data Scientist",
+  description = "Transforming complex data into meaningful insights. Passionate about AI/ML, data visualization, and solving real-world problems through data-driven approaches.",
+  profileImage = "https://api.dicebear.com/7.x/avataaars/svg?seed=nishat",
+  darkMode = false,
+  funMode = false,
+}) => {
   const [copied, setCopied] = useState(false);
 
   const copyEmail = () => {
@@ -61,13 +78,30 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
+          <motion.div
+            className="mb-6"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            <Avatar className="w-32 h-32 mx-auto border-4 border-primary shadow-lg">
+              <AvatarImage src={profileImage} alt={name} />
+              <AvatarFallback>
+                {name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </AvatarFallback>
+            </Avatar>
+          </motion.div>
+
           <motion.h1
             className="text-4xl md:text-6xl font-bold mb-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Nishat Jahan
+            {name}
           </motion.h1>
 
           <motion.div
@@ -135,18 +169,38 @@ const HeroSection = () => {
           </motion.h2>
 
           <motion.p
-            className="max-w-lg text-muted-foreground mb-10"
+            className="max-w-lg text-muted-foreground mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            Transforming complex data into meaningful insights. Passionate about
-            AI/ML, data visualization, and solving real-world problems through
-            data-driven approaches.
+            {description}
           </motion.p>
 
           <motion.div
-            className="flex space-x-4"
+            className="mb-10 max-w-lg mx-auto bg-slate-100 dark:bg-slate-800 p-4 rounded-lg border-l-4 border-primary"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
+          >
+            <h3 className="font-medium mb-2 text-slate-800 dark:text-slate-200">
+              About Me
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-sm text-slate-600 dark:text-slate-300">
+              <li>
+                Currently a 2nd-year Data Science student at United
+                International University (UIU)
+              </li>
+              <li>Skilled in Python, SQL, and R programming languages</li>
+              <li>
+                Achieved Golden A+ in both SSC and HSC from Kushtia Government
+                Girls' High School and Kushtia Government College
+              </li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            className="flex space-x-4 justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.8 }}
@@ -183,6 +237,17 @@ const HeroSection = () => {
                 </Tooltip>
               ))}
             </TooltipProvider>
+          </motion.div>
+
+          <motion.div
+            className="mt-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.7, duration: 0.8 }}
+          >
+            <Button variant="outline" className="flex items-center gap-2">
+              <Download className="h-4 w-4" /> Download CV
+            </Button>
           </motion.div>
 
           <motion.div

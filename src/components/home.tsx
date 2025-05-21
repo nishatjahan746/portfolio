@@ -15,6 +15,8 @@ import HeroSection from "./HeroSection";
 import SkillsSection from "./SkillsSection";
 import ProjectsSection from "./ProjectsSection";
 import QuizSection from "./QuizSection";
+import CertificatesSection from "./CertificatesSection";
+import ContactSection from "./ContactSection";
 
 const HomePage = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -67,9 +69,14 @@ const HomePage = () => {
 
         <ProjectsSection darkMode={darkMode} funMode={funMode} />
 
+        <CertificatesSection />
+
         <QuizSection darkMode={darkMode} funMode={funMode} />
 
-        <section id="contact" className="py-16">
+        <ContactSection />
+
+        {/* Old contact form - can be removed */}
+        <section id="contact-form" className="py-16 hidden">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -46,6 +46,42 @@ const SkillsSection = () => {
     },
   ];
 
+  const technicalSkills = [
+    {
+      name: "Python",
+      level: 85,
+      icon: <Code className="h-5 w-5" />,
+      color: "bg-blue-500",
+    },
+    {
+      name: "R",
+      level: 75,
+      icon: <BarChart2 className="h-5 w-5" />,
+      color: "bg-cyan-500",
+    },
+    {
+      name: "SQL",
+      level: 80,
+      icon: <Database className="h-5 w-5" />,
+      color: "bg-violet-500",
+    },
+  ];
+
+  const softSkills = [
+    {
+      name: "Problem Solving",
+      level: 90,
+      icon: <Brain className="h-5 w-5" />,
+      color: "bg-amber-500",
+    },
+    {
+      name: "Communication",
+      level: 85,
+      icon: <PieChart className="h-5 w-5" />,
+      color: "bg-emerald-500",
+    },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -98,14 +134,49 @@ const SkillsSection = () => {
                   <h3 className="text-xl font-semibold mb-6 text-slate-800 dark:text-slate-100">
                     Core Competencies
                   </h3>
+                  <h4 className="text-lg font-medium mb-4 text-slate-700 dark:text-slate-200">
+                    Technical Skills
+                  </h4>
                   <div className="space-y-6">
-                    {skills.map((skill) => (
+                    {technicalSkills.map((skill) => (
                       <motion.div
                         key={skill.name}
                         initial={{ width: 0 }}
                         whileInView={{ width: "100%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.2 }}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`p-1.5 rounded-md ${skill.color.replace("bg-", "bg-opacity-20 text-")}`}
+                            >
+                              {skill.icon}
+                            </span>
+                            <span className="font-medium text-slate-700 dark:text-slate-200">
+                              {skill.name}
+                            </span>
+                          </div>
+                          <span className="text-sm text-slate-500 dark:text-slate-400">
+                            {skill.level}%
+                          </span>
+                        </div>
+                        <Progress value={skill.level} className="h-2" />
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <h4 className="text-lg font-medium mb-4 mt-8 text-slate-700 dark:text-slate-200">
+                    Soft Skills
+                  </h4>
+                  <div className="space-y-6">
+                    {softSkills.map((skill) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.4 }}
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
